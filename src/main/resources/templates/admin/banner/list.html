@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 화면 </title>
+    <style>
+        .list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .list table th, .list table td {
+            border: solid 1px #000;
+        }
+
+        .banner-menu {
+            position: relative;
+            padding: 5px 0 10px 0;
+            text-align: left;
+        }
+
+        .banner-menu .total-count {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 20px;
+            float: right;
+        }
+
+        .pager {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pager a.on {
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="/fragments/layout.html :: fragment-admin-body-menu"></div>
+<h1>배너 관리</h1>
+
+<div class="list">
+
+    <div class="banner-menu">
+        <a href="/admin/banner/list.do"> 배너 등록 </a>
+        |
+        <a href="/admin/banner/list.do"> 선택 삭제 </a>
+        <p class="total-count">전체 <span th:text="${totalCount}"></span>개</p>
+
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th> 화면 표시 여부</th>
+            <th>
+                NO
+            </th>
+            <th>
+                배너명
+            </th>
+            <th>
+                이미지
+            </th>
+            <th>
+                등록일
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="x : ${list}">
+            <td th:text="">?</td>
+            <td th:text="${x.seq}">1</td>
+            <td>
+                <a th:text="${x.userId}"
+                   th:href="${'detail.do?userId=' + x.userId}">
+                    satcop@naver.com</a>
+            </td>
+            <td th:text="${x.userName}">이미지</td>
+            <td th:text="${x.phone}">등록일</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="pager" th:utext="${pager}">
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
