@@ -8,9 +8,23 @@
     <h1>메인 페이지 </h1>
     <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
 
-    <div>
-        <img src="/files/2021/09/05/6e5170576b0c4c29879e5334dfccab2d.png"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+    <div class="home__slider">
+        <div class="slider">
+            <div th:each="x : ${List}">
+                <a th:href="${x.getAddress()}"><img th:src="${x.getImageDirectory()}" th:alt="${x.getBannerName()}" /></a>
+            </div>
+        </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $('.slider').bxSlider();
+        });
+    </script>
 
 </body>
 </html>

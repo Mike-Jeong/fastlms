@@ -29,7 +29,7 @@ public class MainController {
         */
 
         //String userAgent = RequestUtils.getUserAgent(request);
-        //model.addAttribute("List", bannerService.findVisible());
+        model.addAttribute("List", bannerService.findVisible());
         return "index";
     }
     
