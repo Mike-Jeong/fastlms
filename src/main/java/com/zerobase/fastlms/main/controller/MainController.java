@@ -1,9 +1,11 @@
 package com.zerobase.fastlms.main.controller;
 
 
+import com.zerobase.fastlms.banner.service.BannerService;
 import com.zerobase.fastlms.components.MailComponents;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 public class MainController {
 
     private final MailComponents mailComponents;
-    
+    private final BannerService bannerService;
+
     @RequestMapping("/")
-    public String index(HttpServletRequest request) {
+    public String index(Model model) {
         
         /*
         String email = "satcop@naver.com";
@@ -26,7 +29,7 @@ public class MainController {
         */
 
         //String userAgent = RequestUtils.getUserAgent(request);
-        
+        //model.addAttribute("List", bannerService.findVisible());
         return "index";
     }
     

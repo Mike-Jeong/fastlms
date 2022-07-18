@@ -1,6 +1,8 @@
 package com.zerobase.fastlms.util;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.time.LocalDate;
 
 public class RequestUtils {
 
@@ -70,5 +72,38 @@ public class RequestUtils {
 
         return ip;
 
+    }
+
+    public static String saveFile(String originalFilename, String baseUrlPath, String bannerName) {
+        LocalDate now = LocalDate.now();
+        String urlDir = String.format("%s/%d/%02d/%02d/", baseUrlPath, now.getYear(), now.getMonthValue(), now.getDayOfMonth());
+
+        String[] dirs = {
+                String.format("%s/%d/", baseUrlPath, now.getYear()),
+                String.format("%s/%d/%02d/", baseUrlPath, now.getYear(), now.getMonthValue()),
+                String.format("%s/%d/%02d/%02d/", baseUrlPath, now.getYear(), now.getMonthValue(), now.getDayOfMonth())};
+
+        for (String dir : dirs) {
+            File file = new File(dir);
+            if (!file.isDirectory()) {
+                file.mkdir();
+            }
+        }
+
+        String fileExtension = "";
+        if (originalFilename != null) {
+            int dotPos = originalFilename.lastIndexOf(".");
+            if (dotPos > -1) {
+                fileExtension = originalFilename.substring(dotPos + 1);
+            }
+        }
+
+        String newUrlFilename = String.format("%s%s", urlDir, bannerName);
+
+        if (fileExtension.length() > 0) {
+            newUrlFilename += "." + fileExtension;
+        }
+
+        return newUrlFilename;
     }
 }
